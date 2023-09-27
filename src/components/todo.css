@@ -1,0 +1,63 @@
+body {
+    background: aliceblue;
+}
+
+.container {
+    width: 50%;
+    background-color: #a0a0b4;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 200px;
+    margin: 0 auto;
+    height: 400px;
+
+}
+
+.header {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 77%;
+    display: block;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+}
+
+.btn {
+    background-color: red;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.todo_cover {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
+}
+
+.showData {
+    background: ghostwhite;
+    font-size: 22px;
+    color: black;
+    width: 62%;
+    text-align: center;
+    border-radius: 8px;
+    margin: 0 0 10px 20px;
+    position: relative;
+    padding: 6px 0;
+}
+
+.delete {
+    position: absolute;
+    right: -77px;
+    top: 1px;
+}
