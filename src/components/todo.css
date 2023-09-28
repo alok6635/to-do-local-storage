@@ -1,41 +1,102 @@
-body {
-    background: aliceblue;
+/* reset default by universal selector basically we should use reset css but for now i am using this*/
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
 }
 
-.container {
-    width: 50%;
-    background-color: #a0a0b4;
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 200px;
-    margin: 0 auto;
-    height: 400px;
-
+/* global css */
+.flex {
+    display: flex;
 }
 
-.header {
-    font-size: 26px;
-    font-weight: 700;
-    text-align: center;
-    color: white;
-    margin-bottom: 10px;
+.justify-content {
+    justify-content: space-between;
 }
 
 input {
-    width: 77%;
+    width: 100%;
     display: block;
     padding: 10px;
     border: none;
     border-radius: 7px;
+    box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+
+
+}
+
+input:focus-visible {
+    outline: none;
+}
+
+::placeholder {
+    font: 12px;
+    color: #b1abab;
 }
 
 .btn {
-    background-color: red;
-    padding: 10px;
+    padding: 10px 20px;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    background: #dba9a9;
+}
+
+h2 {
+    font-size: 17px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #eeeaea;
+    padding-bottom: 4px;
+
+
+}
+
+ul {
+    margin-bottom: 20px;
+}
+
+li {
+    font-size: 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    box-shadow: -2px 2px 9px rgba(0,0,0,0.05);
+    color: #b2a6a6;
+    cursor: pointer;
+}
+
+/* global griding */
+.container {
+   
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0px 9px 29px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+.logo {
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    background: #514848cf;
+    text-decoration: none;
+    padding: 12px 10px 10px 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.spaceBottom {
+    margin-bottom: 20px;
+}
+
+.reset {
+    background-color: black;
 }
 
 .todo_cover {
@@ -44,20 +105,15 @@ input {
     margin-bottom: 15px;
 }
 
-.showData {
-    background: ghostwhite;
-    font-size: 22px;
-    color: black;
-    width: 62%;
-    text-align: center;
-    border-radius: 8px;
-    margin: 0 0 10px 20px;
-    position: relative;
-    padding: 6px 0;
-}
 
 .delete {
     position: absolute;
     right: -77px;
     top: 1px;
+}
+
+.active_todo {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
 }

@@ -1,54 +1,93 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './todo.css';
+const LOCAL_STORAGE_KEY = "storedData";
 
 const Todo = () => {
-    //initialize state- 
-    const [inputData, setInputData] = useState("");
-    const [listData, setListData] = useState([])
-    //Add task- 
-    function handleAddTodo() {
-        //    setListData([...listData,inputData])
-        // console.log(listData);    
-        setListData(() => {
-            const updatedList = [...listData, inputData]
-            // console.log(updatedList);
-            setInputData(' ');
-            return updatedList;
-        })
-    }
-    //Delete task-
-    function removeTodo(index) {
-        const updatedListData = listData.filter((value, id) => {
-            return index !== id
-        })
-        setListData(updatedListData)
-    }
+  // Initialize state with local storage
+  const [inputData, setInputData] = useState(() => {
+    const storedData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    return (storedData && storedData.inputData) || '';
+  });
+  const [activeTodos, setActiveTodos] = useState(() => {
+    const storedData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    return (storedData && storedData.activeTodos) || [];
+  });
+  const [completedTodos, setCompletedTodos] = useState(() => {
+    const storedData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    return (storedData && storedData.completedTodos) || [];
+  });
 
-    //Remove all task-
-    function removeAll(){
-setListData([])
+  // Save state to local storage whenever it changes
+  useEffect(() => {
+    const dataToStore = {
+      inputData,
+      activeTodos,
+      completedTodos,
+    };
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToStore));
+  }, [inputData, activeTodos, completedTodos]);
+
+  // Add task when Enter key is pressed
+  function handleKeyPress(e) {
+    if (e.key === 'Enter' && inputData.trim() !== '') {
+      setActiveTodos([inputData.trim(), ...activeTodos]);
+      setInputData('');
     }
-    return (
-        <>
-            <div className="container">
-                <div className='header'>Todo List</div>
-                <div className='todo_cover'>
-                    <input type='text' placeholder='Add Content' value={inputData} onChange={(e) => setInputData(e.target.value)} />
-                    <button className='btn' onClick={handleAddTodo}>Add task</button>
-                </div>
-                {listData.map((item, index) => {
-                    return (
-                        <>
-                            <div key={index} className='showData'>{item}
-                                <button className='btn delete' onClick={() => removeTodo(index)}>Remove</button>
-                            </div>
-                        </>
-                    )
-                })}
-                {listData.length >= 1 && <button className='btn' onClick={removeAll}>Delete All</button>}
-            </div>
-        </>
-    )
+  }
+
+  // Handle clicking on an active todo
+  function handleActiveTodoClick(todo,index) {
+    // Mark the todo as completed
+    const updatedActiveTodos = activeTodos.filter((item, i) => i !== index);
+    setCompletedTodos([todo, ...completedTodos]);
+    setActiveTodos(updatedActiveTodos);
+  }
+
+
+
+  // Reset all tasks
+  function resetAll() {
+    setActiveTodos([]);
+    setCompletedTodos([]);
+  }
+
+  return (
+    <>
+      <div className="container">
+      <div className='flex justify-content spaceBottom'>
+      <a href="/" className='logo'>TODO App</a>
+        <button className='btn' onClick={resetAll}>Reset</button>
+      </div>
+
+
+
+          <input
+            type='text'
+            placeholder='Please type & press enter'
+            value={inputData}
+            onChange={(e) => setInputData(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+        <h2>Active todo</h2>
+        <ul>
+        {activeTodos.map((item, index) => (
+          <li key={index} onClick={() => handleActiveTodoClick(item,index)}>
+            {item}
+          </li>
+        ))}
+        </ul>
+        <h2>Complete todo</h2>
+        <ul>
+        {completedTodos.map((item, index) => (
+          <li key={index} >
+            {item}
+          </li>
+         
+        ))}
+         </ul>
+      </div>
+    </>
+  );
 }
 
 export default Todo;
