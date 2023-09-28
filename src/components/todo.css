@@ -95,25 +95,4 @@ li {
     margin-bottom: 20px;
 }
 
-.reset {
-    background-color: black;
-}
 
-.todo_cover {
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 15px;
-}
-
-
-.delete {
-    position: absolute;
-    right: -77px;
-    top: 1px;
-}
-
-.active_todo {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-}
